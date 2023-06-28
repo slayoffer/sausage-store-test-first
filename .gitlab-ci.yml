@@ -1,0 +1,19 @@
+stages:
+    # - bridge
+    - complete
+# bridge-to-second:
+#     stage: bridge
+#     variables:
+#         DOCKER_TAG: 1.0.${CI_PIPELINE_ID}
+#     trigger:
+#         strategy: depend
+#         project: std-012-042/test-second
+#         branch: argo
+complete:
+    stage: complete
+    script:
+        - echo $ARGO_TOKEN > token.file
+    artifacts:
+        paths:
+        - token.file
+        expire_in: 2 mins
